@@ -19,6 +19,7 @@ COPY Gemfile* /fluentd/
      && apt-get install \
      -y --no-install-recommends \
      $buildDeps net-tools \
+    && apt-get install -y vim \
     && gem install bundler --version 1.16.2 \
     && bundle config silence_root_warning true \
     && bundle install --gemfile=/fluentd/Gemfile --path=/fluentd/vendor/bundle \
@@ -36,6 +37,7 @@ COPY ./conf/systemd.conf /fluentd/etc/
 COPY ./conf/kubernetes.conf /fluentd/etc/
 COPY ./conf/prometheus.conf /fluentd/etc/
 COPY ./conf/nginx.conf /fluentd/etc/
+COPY ./conf/apps_json.conf /fluentd/etc/
 RUN touch /fluentd/etc/disable.conf
 
 # Copy plugins
